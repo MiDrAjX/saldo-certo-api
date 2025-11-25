@@ -77,7 +77,7 @@ http://localhost:3000
   "password": "senha123"
 }
 ```
-
+![Teste da requisição de criar usuario](image.png)
 ---
 
 ## Login
@@ -90,7 +90,7 @@ http://localhost:3000
   "password": "senha123"
 }
 ```
-
+![Teste da requisição de login](image-1.png)
 **Resposta:** Se sucesso você recebe um `access_token` para usar nos outros endpoints
 
 ## To-do crud de receitas e despesas
