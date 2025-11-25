@@ -11,22 +11,22 @@ interface User {
 
 @Injectable()
 export class PrismaService {
-  private users: User[] = [];
+  private users_list: User[] = [];
   private userIdCounter = 1;
 
   // User operations
   async user(where: { id?: number; email?: string }): Promise<User | null> {
     if (where.id) {
-      return this.users.find((u) => u.id === where.id) || null;
+      return this.users_list.find((u) => u.id === where.id) || null;
     }
     if (where.email) {
-      return this.users.find((u) => u.email === where.email) || null;
+      return this.users_list.find((u) => u.email === where.email) || null;
     }
     return null;
   }
 
-  async users(): Promise<User[]> {
-    return this.users;
+  async getUsers(): Promise<User[]> {
+    return this.users_list;
   }
 
   async createUser(data: {
@@ -42,7 +42,7 @@ export class PrismaService {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
-    this.users.push(newUser);
+    this.users_list.push(newUser);
     return newUser;
   }
 
@@ -50,7 +50,7 @@ export class PrismaService {
     where: { id: number },
     data: Partial<{ email: string; name: string; password: string }>,
   ): Promise<User> {
-    const user = this.users.find((u) => u.id === where.id);
+    const user = this.users_list.find((u) => u.id === where.id);
     if (!user) {
       throw new Error(`User with id ${where.id} not found`);
     }
@@ -59,11 +59,11 @@ export class PrismaService {
   }
 
   async deleteUser(where: { id: number }): Promise<User> {
-    const index = this.users.findIndex((u) => u.id === where.id);
+    const index = this.users_list.findIndex((u) => u.id === where.id);
     if (index === -1) {
       throw new Error(`User with id ${where.id} not found`);
     }
-    const [deletedUser] = this.users.splice(index, 1);
+    const [deletedUser] = this.users_list.splice(index, 1);
     return deletedUser;
   }
 }
