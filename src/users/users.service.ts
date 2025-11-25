@@ -8,7 +8,7 @@ export class UsersService {
   constructor(private prisma: PrismaService) {}
 
   async findAll(): Promise<UserResponseDto[]> {
-    const users = await this.prisma.users();
+    const users = await this.prisma.getUsers();
     return users.map((user) => this.formatUserResponse(user));
   }
 
